@@ -22,6 +22,7 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@wordpress/scripts": "^16.1.0"
+		"@wordpress/scripts": "^16.1.0",
+		"react-chartjs-2": "^3.0.3"
 	}
 }

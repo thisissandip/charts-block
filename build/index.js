@@ -93,7 +93,7 @@
 /*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/bar-graph\",\"category\":\"text\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"displayAsDropdown\":{\"type\":\"boolean\",\"default\":false},\"showPostCounts\":{\"type\":\"boolean\",\"default\":false}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/bar-graph\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"displayAsDropdown\":{\"type\":\"boolean\",\"default\":false},\"showPostCounts\":{\"type\":\"boolean\",\"default\":false}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
 
 /***/ }),
 
@@ -139,6 +139,9 @@ __webpack_require__.r(__webpack_exports__);
 var _block_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/bar-graph/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -150,10 +153,16 @@ const {
   supports,
   textdomain
 } = _block_json__WEBPACK_IMPORTED_MODULE_2__;
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__["createElement"])('svg', {
+  width: 25,
+  height: 25
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__["createElement"])('path', {
+  d: 'M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z'
+}));
 const settings = {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Bar Graph', `${textdomain}`),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Display your data in a Bar Graph.', `${textdomain}`),
-  icon: 'smiley',
+  icon: icon,
   category,
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Bar Graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('charts-blocks', `${textdomain}`)],
   supports,
@@ -197,7 +206,7 @@ function save() {
 /*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie-chart\",\"category\":\"text\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"displayAsDropdown\":{\"type\":\"boolean\",\"default\":false},\"showPostCounts\":{\"type\":\"boolean\",\"default\":false}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie-chart\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"displayAsDropdown\":{\"type\":\"boolean\",\"default\":false},\"showPostCounts\":{\"type\":\"boolean\",\"default\":false}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
 
 /***/ }),
 
@@ -243,6 +252,9 @@ __webpack_require__.r(__webpack_exports__);
 var _block_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/pie-chart/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 

@@ -51,3 +51,21 @@ function register_blocks($slug, $block_name){
 
 add_action("init", "load_charts_block");
 
+function charts_blocks_categories($categories){
+    $existing_categories = wp_list_pluck( $categories, 'slug' );
+    
+    if( ! in_array("charts_block_sandip", $categories)){
+        $new_block_categories = array_merge($categories, array(
+            array(
+                "slug" => "charts_blocks",
+                "title" => "Charts",
+                "icons" => NULL
+            )
+            ));
+                
+        return $new_block_categories;
+    }
+
+}
+
+add_filter("block_categories", "charts_blocks_categories");

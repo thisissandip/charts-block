@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
 	"name": "charts-blocks/bar-graph",
-	"category": "text",
+	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
 		"displayAsDropdown": {
