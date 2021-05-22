@@ -1,0 +1,20 @@
+{
+	"apiVersion": 2,
+	"name": "charts-blocks/pie-chart",
+	"category": "text",
+	"textdomain": "charts-blocks",
+	"attributes": {
+		"displayAsDropdown": {
+			"type": "boolean",
+			"default": false
+		},
+		"showPostCounts": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"align": ["wide", "full"],
+		"html": false
+	}
+}
