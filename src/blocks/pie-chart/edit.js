@@ -1,14 +1,22 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useEffect, useRef, useState } from '@wordpress/element';
+import {
+	PanelBody,
+	PanelRow,
+	TextControl,
+	FormFileUpload,
+	Button,
+} from '@wordpress/components';
 
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ attributes, setAttributes, className }) {
 	const mycanvas = useRef();
 
-	const { label, chartType } = attributes;
+	const [chartObj, setChartObj] = useState(null);
+	const { title, showTitle } = attributes;
 
 	useEffect(() => {
-		new Chart(mycanvas.current, {
+		let chartInstance = new Chart(mycanvas.current, {
 			type: 'pie',
 			data: {
 				labels: ['Red', 'Blue', 'Yellow'],
@@ -29,15 +37,63 @@ export default function Edit({ attributes, setAttributes }) {
 				plugins: {
 					title: {
 						display: true,
-						text: 'hi',
+						text: title,
 					},
 				},
 			},
 		});
+		setChartObj(chartInstance);
 	}, []);
+
+	useEffect(() => {
+		if (chartObj) {
+			updateChartSettings();
+		}
+	}, [title]);
+
+	const updateChartSettings = () => {
+		chartObj.options.plugins.title.text = title;
+		chartObj.update();
+	};
+
+	const handleCSVupload = (e) => {
+		const CSVreader = new FileReader();
+		CSVreader.onload = () => {
+			console.log(CSVreader.result);
+		};
+		CSVreader.readAsText(e.target.files[0]);
+	};
 
 	return (
 		<div {...useBlockProps()}>
+			<InspectorControls>
+				<PanelBody title='Pie Chart Settings' initialOpen={true}>
+					<PanelRow>
+						<TextControl
+							label='Chart Tile'
+							value={title}
+							onChange={(title) => setAttributes({ title })}
+						/>
+					</PanelRow>
+
+					<p>Upload CSV File</p>
+					<FormFileUpload
+						id='HI'
+						accept='.csv'
+						onChange={handleCSVupload}
+						render={({ openFileDialog }) => (
+							<div>
+								<Button
+									style={{ marginBottom: '10px' }}
+									isSecondary
+									onClick={openFileDialog}>
+									Upload CSV File
+								</Button>
+							</div>
+						)}
+					/>
+				</PanelBody>
+			</InspectorControls>
 			<canvas
 				ref={mycanvas}
 				className='pie-chart'

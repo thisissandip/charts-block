@@ -47,19 +47,11 @@ function load_charts_block(){
 
 function display_chart($attributes){
         ob_start(); 
-        ?>
-        <!-- CHECK THE ATTRIBUTES -->
-        <pre>
-            <?php print_r($attributes); ?>
-        </pre>
-        
-        <?php
         /* HTML OUTPUT START */
         require_once CHARTS_BLOCKS_PLUGIN_PATH . "includes/frontend.php"; 
-        $output = ob_get_contents();
-        ob_end_clean(); 
         /* HTML OUTPUT END */
-        return $output;
+        return ob_get_clean();
+     
 }
 
 function register_blocks($slug, $block_name){
@@ -67,6 +59,16 @@ function register_blocks($slug, $block_name){
         "editor_script" => $slug . '-script',
         "editor-style"  => $slug . '-editorStyles',
         "style"         => $slug . '-frontendStyles',
+        'attributes'      => array( 
+            'title' => array(
+                "type" => "string",
+                "default" => "Title"
+            ),
+            'showTitle' => array(
+                "type" => "boolean",
+                "default" => true
+            )
+        ), 
         "render_callback" => "display_chart"
     ) );
 } 

@@ -4,9 +4,13 @@
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
-		"label": {
+		"title": {
 			"type": "string",
-			"default": "Pie Chart"
+			"default": "Bar Graph of Colours"
+		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true
 		}
 	},
 	"supports": {

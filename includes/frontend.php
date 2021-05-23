@@ -1,13 +1,10 @@
+<pre>
+            <?php print_r($attributes); ?>
+</pre>
+
 <?php 
 	echo "<div> <canvas
 	id='mychart-frontend'
-	width='400'
-	height='400'
-	aria-label='Hello ARIA World'
-	role='img'></canvas> </div>
-	
-	<div> <canvas
-	id='mychart-frontend-2'
 	width='400'
 	height='400'
 	aria-label='Hello ARIA World'
@@ -58,7 +55,7 @@
 			},
 		});
 
-		const ctx2 = document.querySelector('#mychart-frontend-2');
+/* 		const ctx2 = document.querySelector('#mychart-frontend-2');
 		var myChart = new Chart(ctx2, {
 			type: 'pie',
 			data: {
@@ -98,5 +95,5 @@
 					],
 				},
 			},
-		});
+		}); */
 </script>
