@@ -4,13 +4,9 @@
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
-		"displayAsDropdown": {
-			"type": "boolean",
-			"default": false
-		},
-		"showPostCounts": {
-			"type": "boolean",
-			"default": false
+		"label": {
+			"type": "string",
+			"default": "Bar Graph of Colours"
 		}
 	},
 	"supports": {

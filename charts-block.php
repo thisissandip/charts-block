@@ -28,12 +28,16 @@ function load_charts_block(){
 
     $assets = include(CHARTS_BLOCKS_PLUGIN_PATH . 'build/index.asset.php'); 
     
+    // enqueue chartjs script for frontend
+    wp_enqueue_script("chartjs","https://cdn.jsdelivr.net/npm/chart.js", array(), "1.0", false);
+   
+    // enqueue block assets
     wp_register_script( $slug.'-script' , CHARTS_BLOCKS_PLUGIN_URL . 'build/index.js',
     $assets["dependencies"],  $assets["version"], false);
     wp_enqueue_script($slug.'-script');
     wp_enqueue_style( $slug.'-editorStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/editorStyles.css', array("wp-edit-blocks"),  "1.0");
     wp_enqueue_style( $slug.'-frontendStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/frontendStyles.css', array(), "1.0");
-
+    
     $all_blocks = array("bar-graph","pie-chart");
 
     foreach($all_blocks as $block_name ){
@@ -41,20 +45,40 @@ function load_charts_block(){
     }  
 }
 
+function display_chart($attributes){
+        ob_start(); 
+        ?>
+        <!-- CHECK THE ATTRIBUTES -->
+        <pre>
+            <?php print_r($attributes); ?>
+        </pre>
+        
+        <?php
+        /* HTML OUTPUT START */
+        require_once CHARTS_BLOCKS_PLUGIN_PATH . "includes/frontend.php"; 
+        $output = ob_get_contents();
+        ob_end_clean(); 
+        /* HTML OUTPUT END */
+        return $output;
+}
+
 function register_blocks($slug, $block_name){
     register_block_type( $slug . '/' . $block_name, array(
         "editor_script" => $slug . '-script',
         "editor-style"  => $slug . '-editorStyles',
-        "style"         => $slug . '-frontendStyles'
+        "style"         => $slug . '-frontendStyles',
+        "render_callback" => "display_chart"
     ) );
 } 
 
 add_action("init", "load_charts_block");
 
-function charts_blocks_categories($categories){
+function charts_blocks_categories($categories)
+{
     $existing_categories = wp_list_pluck( $categories, 'slug' );
     
-    if( ! in_array("charts_block_sandip", $categories)){
+    if( ! in_array("charts_block_sandip", $categories))
+    { 
         $new_block_categories = array_merge($categories, array(
             array(
                 "slug" => "charts_blocks",
@@ -64,7 +88,7 @@ function charts_blocks_categories($categories){
             ));
                 
         return $new_block_categories;
-    }
+    } 
 
 }
 
