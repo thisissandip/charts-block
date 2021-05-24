@@ -35,10 +35,14 @@ function load_charts_block(){
     wp_register_script( $slug.'-script' , CHARTS_BLOCKS_PLUGIN_URL . 'build/index.js',
     $assets["dependencies"],  $assets["version"], false);
     wp_enqueue_script($slug.'-script');
+    wp_enqueue_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."includes/frontend.js", array(),1.0 ,true);
     wp_enqueue_style( $slug.'-editorStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/editorStyles.css', array("wp-edit-blocks"),  "1.0");
     wp_enqueue_style( $slug.'-frontendStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/frontendStyles.css', array(), "1.0");
-    
-    $all_blocks = array("bar-graph","pie-chart");
+
+    // variable to store all charts 
+    wp_add_inline_script( "charts-blocks-frontendscript", 'let allchartsdata = []' , "before" );
+
+    $all_blocks = array("bar","pie");
 
     foreach($all_blocks as $block_name ){
         register_blocks($slug, $block_name);
@@ -47,9 +51,20 @@ function load_charts_block(){
 
 function display_chart($attributes){
         ob_start(); 
+
+        $chartid = $attributes["chartID"] ? $attributes["chartID"] : "chart";
+        wp_add_inline_script( "charts-blocks-frontendscript", 'allchartsdata.push( '. json_encode($attributes).')' , "before" );
+        //print_r($attributes);
+
         /* HTML OUTPUT START */
-        require_once CHARTS_BLOCKS_PLUGIN_PATH . "includes/frontend.php"; 
+        echo '<canvas
+        id='.$chartid.'
+        aria-label="Hello ARIA World"
+        style = "margin: 40px"
+        role="img"></canvas>
+        ';
         /* HTML OUTPUT END */
+
         return ob_get_clean();
      
 }
@@ -59,15 +74,12 @@ function register_blocks($slug, $block_name){
         "editor_script" => $slug . '-script',
         "editor-style"  => $slug . '-editorStyles',
         "style"         => $slug . '-frontendStyles',
+        "script"        => $slug . '-frontendscript',
         'attributes'      => array( 
-            'title' => array(
+            'chartType' => array(
                 "type" => "string",
-                "default" => "Title"
+                "default" => $block_name
             ),
-            'showTitle' => array(
-                "type" => "boolean",
-                "default" => true
-            )
         ), 
         "render_callback" => "display_chart"
     ) );

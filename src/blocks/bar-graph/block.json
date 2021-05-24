@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "charts-blocks/bar-graph",
+	"name": "charts-blocks/bar",
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {

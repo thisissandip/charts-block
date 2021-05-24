@@ -10,11 +10,13 @@ import {
 	SelectControl,
 	ColorPalette,
 } from '@wordpress/components';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Edit({ attributes, setAttributes, className }) {
 	const mycanvas = useRef();
 
-	const { labels, title, chartdata, chartBgColor, labelType } = attributes;
+	const { labels, title, chartdata, chartBgColor, labelType, chartID } =
+		attributes;
 
 	const [chartObj, setChartObj] = useState(null);
 
@@ -22,9 +24,15 @@ export default function Edit({ attributes, setAttributes, className }) {
 	const [labelOptions, setLabelOptions] = useState([]);
 	const [selectedLabel, setSelectedLabel] = useState(labels[0]);
 	const [colorOptions, setColorOptions] = useState([]);
-	const [selectedColor, setSelectedColor] = useState();
+	const [selectedColor, setSelectedColor] = useState(chartBgColor[0]);
 
 	useEffect(() => {
+		// if chartID is null then create a unique id for the frontend Chart
+		if (!chartID) {
+			const uid = uuidv4();
+			setAttributes({ chartID: `chart-${uid}` });
+		}
+
 		let chartInstance = new Chart(mycanvas.current, {
 			type: 'pie',
 			data: {
@@ -202,9 +210,10 @@ export default function Edit({ attributes, setAttributes, className }) {
 			</InspectorControls>
 			<canvas
 				ref={mycanvas}
-				className='pie-chart'
-				width='400'
-				height='400'></canvas>
+				className={className}
+				style={{ margin: 40 }}
+				width='800'
+				height='800'></canvas>
 		</div>
 	);
 }

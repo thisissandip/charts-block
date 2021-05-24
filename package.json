@@ -23,7 +23,6 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@wordpress/scripts": "^16.1.0",
-		"chart.js": "^3.2.1",
-		"react-chartjs-2": "^3.0.3"
+		"uuid": "^8.3.2"
 	}
 }

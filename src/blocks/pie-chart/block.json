@@ -1,12 +1,12 @@
 {
 	"apiVersion": 2,
-	"name": "charts-blocks/pie-chart",
+	"name": "charts-blocks/pie",
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
 		"title": {
 			"type": "string",
-			"default": "Pie Chart of Mostly Spoken Languages"
+			"default": "Pie Chart of Mostly Spoken Languages across the World"
 		},
 		"labelType": {
 			"type": "string",
@@ -23,6 +23,10 @@
 		"chartBgColor": {
 			"type": "array",
 			"default": ["#ff6385", "#36a3eb", "#ffcc56", "#812ffe", "#00e893"]
+		},
+		"chartID": {
+			"type": "string",
+			"default": null
 		}
 	},
 	"supports": {
