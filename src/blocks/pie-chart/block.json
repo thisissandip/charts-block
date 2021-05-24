@@ -11,6 +11,14 @@
 		"showTitle": {
 			"type": "boolean",
 			"default": true
+		},
+		"labels": {
+			"type": "array",
+			"default": ["Red", "Blue", "Yellow"]
+		},
+		"chartdata": {
+			"type": "array",
+			"default": [300, 50, 100]
 		}
 	},
 	"supports": {

@@ -13,17 +13,16 @@ export default function Edit({ attributes, setAttributes, className }) {
 	const mycanvas = useRef();
 
 	const [chartObj, setChartObj] = useState(null);
-	const { title, showTitle } = attributes;
+	const { labels, title, showTitle, chartdata } = attributes;
 
 	useEffect(() => {
 		let chartInstance = new Chart(mycanvas.current, {
 			type: 'pie',
 			data: {
-				labels: ['Red', 'Blue', 'Yellow'],
+				labels,
 				datasets: [
 					{
-						label: 'My First Dataset',
-						data: [300, 50, 100],
+						data: chartdata,
 						backgroundColor: [
 							'rgb(255, 99, 132)',
 							'rgb(54, 162, 235)',
@@ -49,19 +48,36 @@ export default function Edit({ attributes, setAttributes, className }) {
 		if (chartObj) {
 			updateChartSettings();
 		}
-	}, [title]);
+	}, [title, labels, chartdata]);
 
 	const updateChartSettings = () => {
 		chartObj.options.plugins.title.text = title;
+		chartObj.data.datasets[0].data = chartdata;
+		chartObj.data.labels = labels;
 		chartObj.update();
 	};
 
 	const handleCSVupload = (e) => {
 		const CSVreader = new FileReader();
 		CSVreader.onload = () => {
-			console.log(CSVreader.result);
+			DataParser(CSVreader.result);
 		};
 		CSVreader.readAsText(e.target.files[0]);
+	};
+
+	const DataParser = (result) => {
+		const table = result.split('\n').map((eachrow) => eachrow.split(',')); // First Split the data in rows and then separate the column values
+
+		const columnnames = table[0]; // Get the column names which is the first item in rows array
+		table.shift(); // remove the first item which is column names to get the rows data
+		const rowsdata = table;
+
+		//Get the labels which is the second item in rows array
+		const labels = rowsdata.map((row) => row[0]);
+		//Get the data which is the second item in rows array
+		const data = rowsdata.map((row) => parseInt(row[1]));
+
+		setAttributes({ labels: labels, chartdata: data });
 	};
 
 	return (

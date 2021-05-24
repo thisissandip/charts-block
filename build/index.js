@@ -232,7 +232,7 @@ function save() {
 /*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie-chart\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Bar Graph of Colours\"},\"showTitle\":{\"type\":\"boolean\",\"default\":true}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie-chart\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Bar Graph of Colours\"},\"showTitle\":{\"type\":\"boolean\",\"default\":true},\"labels\":{\"type\":\"array\",\"default\":[\"Red\",\"Blue\",\"Yellow\"]},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
 
 /***/ }),
 
@@ -267,17 +267,18 @@ function Edit({
   const mycanvas = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
   const [chartObj, setChartObj] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const {
+    labels,
     title,
-    showTitle
+    showTitle,
+    chartdata
   } = attributes;
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     let chartInstance = new Chart(mycanvas.current, {
       type: 'pie',
       data: {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels,
         datasets: [{
-          label: 'My First Dataset',
-          data: [300, 50, 100],
+          data: chartdata,
           backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
           hoverOffset: 4
         }]
@@ -297,10 +298,12 @@ function Edit({
     if (chartObj) {
       updateChartSettings();
     }
-  }, [title]);
+  }, [title, labels, chartdata]);
 
   const updateChartSettings = () => {
     chartObj.options.plugins.title.text = title;
+    chartObj.data.datasets[0].data = chartdata;
+    chartObj.data.labels = labels;
     chartObj.update();
   };
 
@@ -308,10 +311,28 @@ function Edit({
     const CSVreader = new FileReader();
 
     CSVreader.onload = () => {
-      console.log(CSVreader.result);
+      DataParser(CSVreader.result);
     };
 
     CSVreader.readAsText(e.target.files[0]);
+  };
+
+  const DataParser = result => {
+    const table = result.split('\n').map(eachrow => eachrow.split(',')); // First Split the data in rows and then separate the column values
+
+    const columnnames = table[0]; // Get the column names which is the first item in rows array
+
+    table.shift(); // remove the first item which is column names to get the rows data
+
+    const rowsdata = table; //Get the labels which is the second item in rows array
+
+    const labels = rowsdata.map(row => row[0]); //Get the data which is the second item in rows array
+
+    const data = rowsdata.map(row => parseInt(row[1]));
+    setAttributes({
+      labels: labels,
+      chartdata: data
+    });
   };
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
