@@ -1,5 +1,6 @@
-import edit from './edit';
-import save from './save';
+// Leverating the same edit fucntion from pie
+
+import edit from '../pie/edit';
 import metadata from './block.json';
 import { __ } from '@wordpress/i18n';
 import { createElement } from '@wordpress/element';
@@ -20,7 +21,9 @@ const settings = {
 	supports,
 	attributes,
 	edit,
-	save,
+	save: function () {
+		return null;
+	},
 };
 
 export { name, settings };

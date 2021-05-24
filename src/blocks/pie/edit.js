@@ -15,8 +15,15 @@ import { v4 as uuidv4 } from 'uuid';
 export default function Edit({ attributes, setAttributes, className }) {
 	const mycanvas = useRef();
 
-	const { labels, title, chartdata, chartBgColor, labelType, chartID } =
-		attributes;
+	const {
+		labels,
+		title,
+		chartdata,
+		chartBgColor,
+		labelType,
+		chartID,
+		chartType,
+	} = attributes;
 
 	const [chartObj, setChartObj] = useState(null);
 
@@ -34,7 +41,7 @@ export default function Edit({ attributes, setAttributes, className }) {
 		}
 
 		let chartInstance = new Chart(mycanvas.current, {
-			type: 'pie',
+			type: chartType,
 			data: {
 				labels,
 				datasets: [

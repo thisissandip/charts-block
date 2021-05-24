@@ -16,6 +16,10 @@
 			"type": "array",
 			"default": ["English", "Spanish", "French"]
 		},
+		"chartType": {
+			"type": "string",
+			"default": "pie"
+		},
 		"chartdata": {
 			"type": "array",
 			"default": [300, 50, 100]
