@@ -232,7 +232,7 @@ function save() {
 /*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie-chart\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Bar Graph of Colours\"},\"showTitle\":{\"type\":\"boolean\",\"default\":true},\"labels\":{\"type\":\"array\",\"default\":[\"Red\",\"Blue\",\"Yellow\"]},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie-chart\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Pie Chart of Mostly Spoken Languages\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
 
 /***/ }),
 
@@ -265,13 +265,19 @@ function Edit({
   className
 }) {
   const mycanvas = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-  const [chartObj, setChartObj] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   const {
     labels,
     title,
-    showTitle,
-    chartdata
+    chartdata,
+    chartBgColor,
+    labelType
   } = attributes;
+  const [chartObj, setChartObj] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(null); // local states for Custom Label Colors
+
+  const [labelOptions, setLabelOptions] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [selectedLabel, setSelectedLabel] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(labels[0]);
+  const [colorOptions, setColorOptions] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [selectedColor, setSelectedColor] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])();
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     let chartInstance = new Chart(mycanvas.current, {
       type: 'pie',
@@ -279,7 +285,7 @@ function Edit({
         labels,
         datasets: [{
           data: chartdata,
-          backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+          backgroundColor: chartBgColor,
           hoverOffset: 4
         }]
       },
@@ -292,20 +298,49 @@ function Edit({
         }
       }
     });
-    setChartObj(chartInstance);
+    setChartObj(chartInstance); // set the Labels in SelectControls in required format. Labels will Change when a new CSV is uploaded
+
+    processLabelsforOptions(); // set the Colors in Colorpallete n required format.
+
+    processColorOptions();
   }, []);
+
+  const processLabelsforOptions = () => {
+    let alllabelForOptions = labels.map(label => {
+      return {
+        value: label,
+        label: label
+      };
+    });
+    setLabelOptions(alllabelForOptions);
+  };
+
+  const processColorOptions = () => {
+    let allColors = chartBgColor.map(color => {
+      return {
+        color: color
+      };
+    });
+    setColorOptions(allColors);
+  };
+
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     if (chartObj) {
-      updateChartSettings();
+      // Update Chart settings and Re Render the canvas
+      updateChartSettings(); // Update the Labels in SelectControllers if new CSV is Uploadded
+
+      processLabelsforOptions();
     }
-  }, [title, labels, chartdata]);
+  }, [title, labels, chartdata, chartBgColor]);
 
   const updateChartSettings = () => {
     chartObj.options.plugins.title.text = title;
     chartObj.data.datasets[0].data = chartdata;
     chartObj.data.labels = labels;
+    chartObj.data.datasets[0].backgroundColor = chartBgColor;
     chartObj.update();
-  };
+  }; // handle CSV Upload from FormFileUpload Component and pass on result to DataPareser
+
 
   const handleCSVupload = e => {
     const CSVreader = new FileReader();
@@ -315,13 +350,16 @@ function Edit({
     };
 
     CSVreader.readAsText(e.target.files[0]);
-  };
+    setSelectedColor('#ff6385');
+  }; // Parse the Data in required Format and set new labels, chartdata and LabelType. (Label Type is what you see in Select Controller Select [LabelType] by default it is Language)
+
 
   const DataParser = result => {
     const table = result.split('\n').map(eachrow => eachrow.split(',')); // First Split the data in rows and then separate the column values
 
     const columnnames = table[0]; // Get the column names which is the first item in rows array
 
+    const chartLabelType = columnnames[0];
     table.shift(); // remove the first item which is column names to get the rows data
 
     const rowsdata = table; //Get the labels which is the second item in rows array
@@ -331,8 +369,39 @@ function Edit({
     const data = rowsdata.map(row => parseInt(row[1]));
     setAttributes({
       labels: labels,
-      chartdata: data
+      chartdata: data,
+      labelType: chartLabelType
     });
+  }; // set default selectedcolor of the current selectedlabel using it's index
+
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const labelIndex = labels.indexOf(selectedLabel);
+    const color = chartBgColor[labelIndex];
+
+    if (chartObj) {
+      setSelectedColor(color);
+    }
+  }, [selectedLabel]); // if the current Label Color of selectedLabel is Changed, Update the Label Color
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (chartObj) {
+      updateLabelColor();
+    }
+  }, [selectedColor]);
+
+  const updateLabelColor = () => {
+    const labelIndex = labels.indexOf(selectedLabel);
+    let newLabelColors = [...chartBgColor];
+    newLabelColors[labelIndex] = selectedColor;
+    setAttributes({
+      chartBgColor: [...newLabelColors]
+    });
+  }; // set selected label color from colorPallete
+
+
+  const onLabelColorChange = newColor => {
+    setSelectedColor(newColor);
   };
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
@@ -345,7 +414,6 @@ function Edit({
       title
     })
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Upload CSV File"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["FormFileUpload"], {
-    id: "HI",
     accept: ".csv",
     onChange: handleCSVupload,
     render: ({
@@ -357,6 +425,25 @@ function Edit({
       isSecondary: true,
       onClick: openFileDialog
     }, "Upload CSV File"))
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
+    title: "Chart Color Settings",
+    initialOpen: true
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])(`Select ${labelType}`),
+    value: selectedLabel,
+    onChange: label => setSelectedLabel(label),
+    options: [{
+      value: null,
+      label: `Select ${labelType}`,
+      disabled: !!attributes.user
+    }, ...labelOptions]
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Select Color"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ColorPalette"], {
+    value: selectedColor,
+    colors: colorOptions,
+    style: {
+      width: '200px'
+    },
+    onChange: onLabelColorChange
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("canvas", {
     ref: mycanvas,
     className: "pie-chart",

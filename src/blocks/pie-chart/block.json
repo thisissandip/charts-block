@@ -6,19 +6,23 @@
 	"attributes": {
 		"title": {
 			"type": "string",
-			"default": "Bar Graph of Colours"
+			"default": "Pie Chart of Mostly Spoken Languages"
 		},
-		"showTitle": {
-			"type": "boolean",
-			"default": true
+		"labelType": {
+			"type": "string",
+			"default": "Language"
 		},
 		"labels": {
 			"type": "array",
-			"default": ["Red", "Blue", "Yellow"]
+			"default": ["English", "Spanish", "French"]
 		},
 		"chartdata": {
 			"type": "array",
 			"default": [300, 50, 100]
+		},
+		"chartBgColor": {
+			"type": "array",
+			"default": ["#ff6385", "#36a3eb", "#ffcc56", "#812ffe", "#00e893"]
 		}
 	},
 	"supports": {
