@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "frontend-styles.scss"
+    ],
+    "names": [],
+    "file": "frontend-styles.css"
+}

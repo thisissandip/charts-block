@@ -35,14 +35,14 @@ function load_charts_block(){
     wp_register_script( $slug.'-script' , CHARTS_BLOCKS_PLUGIN_URL . 'build/index.js',
     $assets["dependencies"],  $assets["version"], false);
     wp_enqueue_script($slug.'-script');
-    wp_enqueue_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."includes/frontend.js", array(),1.0 ,true);
+    wp_register_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."includes/frontend.js", array(),1.0 ,true);
     wp_enqueue_style( $slug.'-editorStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/editorStyles.css', array("wp-edit-blocks"),  "1.0");
     wp_enqueue_style( $slug.'-frontendStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/frontendStyles.css', array(), "1.0");
 
     // variable to store all charts 
     wp_add_inline_script( "charts-blocks-frontendscript", 'let allchartsdata = []' , "before" );
 
-    $all_blocks = array("bar","pie");
+    $all_blocks = array("bar","pie","doughnut");
 
     foreach($all_blocks as $block_name ){
         register_blocks($slug, $block_name);

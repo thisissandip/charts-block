@@ -34,14 +34,14 @@ export default function Edit({ attributes, setAttributes, className }) {
 		}
 
 		let chartInstance = new Chart(mycanvas.current, {
-			type: 'pie',
+			type: 'doughnut',
 			data: {
 				labels,
 				datasets: [
 					{
 						data: chartdata,
 						backgroundColor: chartBgColor,
-						hoverOffset: 4,
+						hoverOffset: 2,
 					},
 				],
 			},
@@ -159,7 +159,7 @@ export default function Edit({ attributes, setAttributes, className }) {
 	return (
 		<div {...useBlockProps()}>
 			<InspectorControls>
-				<PanelBody title='Pie Chart Settings' initialOpen={true}>
+				<PanelBody title='Chart Settings' initialOpen={true}>
 					<PanelRow>
 						<TextControl
 							label='Chart Tile'

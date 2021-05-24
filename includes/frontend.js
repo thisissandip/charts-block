@@ -9,30 +9,33 @@ function displayAllCharts() {
 			: ['#ff6385', '#36a3eb', '#ffcc56', '#812ffe', '#00e893'];
 		let title = chart.title
 			? chart.title
-			: 'Pie Chart of Mostly Spoken Languages';
+			: 'Mostly spoken languages across the world';
 
-		var myChart = new Chart(chartctx, {
-			type: chart.chartType,
-			data: {
-				labels: labels,
-				datasets: [
-					{
-						data: data,
-						backgroundColor: bgColors,
-						hoverOffset: 4,
-					},
-				],
-			},
-			options: {
-				plugins: {
-					title: {
-						display: true,
-						text: title,
+		if (chartctx) {
+			var myChart = new Chart(chartctx, {
+				type: chart.chartType,
+				data: {
+					labels: labels,
+					datasets: [
+						{
+							data: data,
+							backgroundColor: bgColors,
+							hoverOffset: 2,
+						},
+					],
+				},
+				options: {
+					plugins: {
+						title: {
+							display: true,
+							text: title,
+						},
 					},
 				},
-			},
-		});
+			});
+		}
 	});
 }
-
-displayAllCharts();
+if (allchartsdata.length > 0) {
+	displayAllCharts();
+}

@@ -8,7 +8,7 @@ const { name, category, attributes, supports, textdomain } = metadata;
 
 const settings = {
 	title: __('Pie Chart', `${textdomain}`),
-	description: __('Display your data in a Pie Chart.', `${textdomain}`),
+	description: __('Display your data in a Doughnut Chart.', `${textdomain}`),
 	icon: 'smiley',
 	category,
 	keywords: [

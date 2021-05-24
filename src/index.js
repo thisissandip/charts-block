@@ -9,8 +9,9 @@ import { registerBlockType } from '@wordpress/blocks';
  * import Block Settings
  */
 
-import * as bargraph from './blocks/bar-graph';
-import * as piechart from './blocks/pie-chart';
+import * as bar from './blocks/bar';
+import * as pie from './blocks/pie';
+import * as dougnut from './blocks/doughnut';
 
 const regsiterBlock = (block) => {
 	const { name, settings } = block;
@@ -18,7 +19,7 @@ const regsiterBlock = (block) => {
 };
 
 const registerAllChartBlocks = () => {
-	const allBlocks = [bargraph, piechart];
+	const allBlocks = [bar, pie, dougnut];
 	allBlocks.forEach((block) => {
 		regsiterBlock(block);
 	});

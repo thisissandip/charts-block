@@ -1,12 +1,12 @@
 {
 	"apiVersion": 2,
-	"name": "charts-blocks/pie",
+	"name": "charts-blocks/doughnut",
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
 		"title": {
 			"type": "string",
-			"default": "Pie Chart of Mostly Spoken Languages across the World"
+			"default": "Mostly Spoken Languages across the World"
 		},
 		"labelType": {
 			"type": "string",
