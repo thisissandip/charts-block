@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "charts-blocks/bar",
+	"name": "charts-blocks/horizontal-bar",
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
@@ -34,7 +34,7 @@
 		},
 		"barAxes": {
 			"type": "string",
-			"default": "x"
+			"default": "y"
 		}
 	},
 	"supports": {

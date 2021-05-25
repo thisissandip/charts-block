@@ -1,4 +1,4 @@
-import edit from './edit';
+import edit from '../bar/edit';
 import metadata from './block.json';
 import { __ } from '@wordpress/i18n';
 import { createElement } from '@wordpress/element';
@@ -17,13 +17,16 @@ const icon = createElement(
 );
 
 const settings = {
-	title: __('Bar Graph', `${textdomain}`),
-	description: __('Display your data in a Bar Graph.', `${textdomain}`),
+	title: __('Horizontal Bar Graph', `${textdomain}`),
+	description: __(
+		'Display your data in a Horizontal Bar Graph.',
+		`${textdomain}`
+	),
 	icon: icon,
 	category,
 	keywords: [
-		__('Bar Chart', `${textdomain}`),
-		__('Bar', `${textdomain}`),
+		__('Horizontal Bar Chart', `${textdomain}`),
+		__('Horizontal Bar', `${textdomain}`),
 		__('charts', `${textdomain}`),
 		__('charts block', `${textdomain}`),
 		__('charts-blocks', `${textdomain}`),

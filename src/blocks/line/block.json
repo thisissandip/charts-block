@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "charts-blocks/bar",
+	"name": "charts-blocks/line",
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
@@ -18,7 +18,7 @@
 		},
 		"chartType": {
 			"type": "string",
-			"default": "bar"
+			"default": "line"
 		},
 		"chartdata": {
 			"type": "array",
@@ -31,10 +31,6 @@
 		"chartID": {
 			"type": "string",
 			"default": null
-		},
-		"barAxes": {
-			"type": "string",
-			"default": "x"
 		}
 	},
 	"supports": {

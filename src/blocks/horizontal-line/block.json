@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "charts-blocks/bar",
+	"name": "charts-blocks/horizontal-line",
 	"category": "charts_blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
@@ -18,7 +18,7 @@
 		},
 		"chartType": {
 			"type": "string",
-			"default": "bar"
+			"default": "line"
 		},
 		"chartdata": {
 			"type": "array",
@@ -34,7 +34,7 @@
 		},
 		"barAxes": {
 			"type": "string",
-			"default": "x"
+			"default": "y"
 		}
 	},
 	"supports": {

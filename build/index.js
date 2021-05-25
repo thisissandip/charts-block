@@ -925,6 +925,198 @@ function version(uuid) {
 
 /***/ }),
 
+/***/ "./src/blocks/bar/Inspector.js":
+/*!*************************************!*\
+  !*** ./src/blocks/bar/Inspector.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+
+
+
+
+
+
+
+function Inspector({
+  attributes,
+  setAttributes,
+  chartObj
+}) {
+  const {
+    title,
+    labels,
+    chartBgColor,
+    labelType
+  } = attributes; // local states for Custom Label Colors
+
+  const [labelOptions, setLabelOptions] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [selectedColor, setSelectedColor] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(chartBgColor[0]);
+  const [selectedLabel, setSelectedLabel] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(labels[0]);
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    // set the Labels in SelectControls required format in the. Labels will Change when a new CSV is uploaded
+    processLabelsforOptions();
+  }, []);
+
+  const processLabelsforOptions = () => {
+    let alllabelForOptions = labels.map(label => {
+      return {
+        value: label,
+        label: label
+      };
+    });
+    setLabelOptions(alllabelForOptions);
+  };
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (chartObj) {
+      // Update the Labels in SelectControllers if new CSV is Uploadded
+      processLabelsforOptions();
+    }
+  }, [labels]);
+  /* File Upload Start */
+  // handle CSV Upload from FormFileUpload Component and pass on result to DataPareser
+
+  const handleCSVupload = e => {
+    const CSVreader = new FileReader();
+
+    CSVreader.onload = () => {
+      DataParser(CSVreader.result);
+    };
+
+    CSVreader.readAsText(e.target.files[0]);
+    setSelectedColor('#ff6385');
+  }; // Parse the Data in required Format and set new labels, chartdata and LabelType. (Label Type is what you see in Select Controller Select [LabelType] by default it is Language)
+
+
+  const DataParser = result => {
+    const table = result.split('\n').map(eachrow => eachrow.split(',')); // First Split the data in rows and then separate the column values
+
+    const columnnames = table[0]; // Get the column names which is the first item in rows array
+
+    const chartLabelType = columnnames[0];
+    table.shift(); // remove the first item which is column names to get the rows data
+
+    const rowsdata = table; //Get the labels which is the second item in rows array
+
+    const labels = rowsdata.map(row => row[0]); //Get the data which is the second item in rows array
+
+    const data = rowsdata.map(row => parseInt(row[1]));
+    setAttributes({
+      labels: labels,
+      chartdata: data,
+      labelType: chartLabelType
+    });
+  };
+  /* File Upload End */
+
+  /* Label Bg Color Settings Start */
+  // if the current Label Color of selectedLabel is Changed, Update the Label Color
+
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (chartObj) {
+      updateLabelColor();
+    }
+
+    console.log(selectedColor);
+  }, [selectedColor]);
+
+  const updateLabelColor = () => {
+    const labelIndex = labels.indexOf(selectedLabel);
+    let newLabelColors = [...chartBgColor];
+    newLabelColors[labelIndex] = selectedColor;
+    setAttributes({
+      chartBgColor: [...newLabelColors]
+    });
+  }; // set default selectedcolor of the current selectedlabel using it's index
+
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const labelIndex = labels.indexOf(selectedLabel);
+    const color = chartBgColor[labelIndex];
+
+    if (chartObj) {
+      setSelectedColor(color);
+    }
+
+    console.log(labelIndex);
+  }, [selectedLabel]);
+  /* Label Bg Color Settings End */
+  // ColorPallete Onchange Function
+
+  const onLabelColorChange = newColor => {
+    setSelectedColor(newColor);
+  };
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
+    title: "Chart Settings",
+    initialOpen: true
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["TextControl"], {
+    label: "Chart Tile",
+    value: title,
+    onChange: title => setAttributes({
+      title
+    })
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Upload CSV File"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["FormFileUpload"], {
+    accept: ".csv",
+    onChange: handleCSVupload,
+    render: ({
+      openFileDialog
+    }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+      style: {
+        marginBottom: '10px'
+      },
+      isSecondary: true,
+      onClick: openFileDialog
+    }, "Upload CSV File"))
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
+    title: "Chart Color Settings",
+    initialOpen: true
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])(`Select ${labelType}`),
+    value: selectedLabel,
+    onChange: label => setSelectedLabel(label),
+    options: [{
+      value: null,
+      label: `Select ${labelType}`
+    }, ...labelOptions]
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Select Color"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ColorPalette"], {
+    value: selectedColor,
+    colors: [{
+      color: '#ff6385'
+    }, {
+      color: '#36a3eb'
+    }, {
+      color: '#ffcc56'
+    }, {
+      color: '#812ffe'
+    }, {
+      color: '#00e893'
+    }],
+    style: {
+      width: '200px'
+    },
+    onChange: onLabelColorChange
+  }))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Inspector);
+
+/***/ }),
+
 /***/ "./src/blocks/bar/block.json":
 /*!***********************************!*\
   !*** ./src/blocks/bar/block.json ***!
@@ -932,7 +1124,7 @@ function version(uuid) {
 /*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/bar\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Bar Graph of Colours\"},\"showTitle\":{\"type\":\"boolean\",\"default\":true}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/bar\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"bar\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null},\"barAxes\":{\"type\":\"string\",\"default\":\"x\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
 
 /***/ }),
 
@@ -952,46 +1144,135 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Inspector */ "./src/blocks/bar/Inspector.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+
+
 
 
 
 
 function Edit({
   attributes,
-  setAttributes
+  setAttributes,
+  className
 }) {
   const mycanvas = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
   const {
-    label
+    labels,
+    title,
+    chartdata,
+    chartBgColor,
+    labelType,
+    barAxes,
+    chartID,
+    chartType
   } = attributes;
+  const [chartObj, setChartObj] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    new Chart(mycanvas.current, {
-      type: 'bar',
+    // if chartID is null then create a unique id for the frontend Chart
+    if (!chartID) {
+      const uid = Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])();
+      setAttributes({
+        chartID: `chart-${uid}`
+      });
+    }
+
+    let chartInstance = new Chart(mycanvas.current, {
+      type: chartType,
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels,
         datasets: [{
-          label,
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-          borderWidth: 1
+          data: chartdata,
+          backgroundColor: chartBgColor,
+          hoverOffset: 2
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
+        indexAxis: barAxes ? barAxes : null,
+
+        /* 	fill: true,
+        backgroundColor: 'rgba(244, 144, 128, 0.1)', */
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: title
           }
         }
       }
     });
+    setChartObj(chartInstance);
   }, []);
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("canvas", {
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (chartObj) {
+      /* If New CSV is uploaded Update Chart settings and Re Render the canvas */
+      updateChartSettings();
+    }
+  }, [chartdata]);
+
+  const updateChartSettings = () => {
+    /* 	Function to Remove the Old Dataset and Push the Uploaded one */
+    filterData(chartObj);
+    chartObj.data.labels = labels;
+    chartObj.update();
+  };
+
+  function filterData(chart) {
+    if (chartType === 'bar' || chartType === 'line') {
+      /* Old dataset length */
+      const existingdataLength = chart.data.datasets[0].data.length; // exisiting colors
+
+      let colors = [...chartBgColor];
+      /*  From the existing dataset, remove the old data set items
+        and push the new uploaded dataset to it */
+
+      chartdata.forEach((dataitem, index) => {
+        if (index < existingdataLength) {
+          chart.data.datasets[0].data.shift();
+        }
+
+        chart.data.datasets[0].data.push(dataitem); // if the dataset has new bars (that is if it's length is greater than existing)
+        // add colors for the new for the new bars
+
+        if (chartBgColor.length <= chartdata.length) {
+          chartBgColor.push(...colors);
+        }
+      });
+      let newBgColor = chartBgColor.slice(0, chartdata.length);
+      setAttributes({
+        chartBgColor: newBgColor
+      });
+    } else {
+      chartObj.data.datasets[0].data = chartdata;
+    }
+  } // If the Bg color of label or The title is Changed, Update the Chart
+
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (chartObj) {
+      chartObj.options.plugins.title.text = title;
+      chartObj.data.datasets[0].backgroundColor = chartBgColor;
+      chartObj.update();
+    }
+
+    console.log(chartBgColor);
+  }, [chartBgColor, title]);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "chart-wrapper"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_Inspector__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    chartObj: chartObj,
+    attributes: attributes,
+    setAttributes: setAttributes
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("canvas", {
     ref: mycanvas,
-    className: "pie-chart",
-    width: "400",
-    height: "400"
-  }));
+    className: className,
+    style: {
+      margin: 40
+    },
+    width: "800",
+    height: "800"
+  })));
 }
 
 /***/ }),
@@ -1036,7 +1317,7 @@ const settings = {
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Bar Graph.', `${textdomain}`),
   icon: icon,
   category,
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`)],
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
   attributes,
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -1070,7 +1351,7 @@ module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/doughnut
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _pie_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pie/edit */ "./src/blocks/pie/edit.js");
+/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/doughnut/block.json");
 var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/doughnut/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -1094,10 +1375,188 @@ const settings = {
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Doughnut Chart.', `${textdomain}`),
   icon: 'smiley',
   category,
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`)],
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
   attributes,
-  edit: _pie_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  save: function () {
+    return null;
+  }
+};
+
+
+/***/ }),
+
+/***/ "./src/blocks/horizontal-bar/block.json":
+/*!**********************************************!*\
+  !*** ./src/blocks/horizontal-bar/block.json ***!
+  \**********************************************/
+/*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/horizontal-bar\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"bar\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null},\"barAxes\":{\"type\":\"string\",\"default\":\"y\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+
+/***/ }),
+
+/***/ "./src/blocks/horizontal-bar/index.js":
+/*!********************************************!*\
+  !*** ./src/blocks/horizontal-bar/index.js ***!
+  \********************************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/horizontal-bar/block.json");
+var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/horizontal-bar/block.json", 1);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const {
+  name,
+  category,
+  attributes,
+  supports,
+  textdomain
+} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('svg', {
+  width: 25,
+  height: 25
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('path', {
+  d: 'M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z'
+}));
+const settings = {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar Graph', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Horizontal Bar Graph.', `${textdomain}`),
+  icon: icon,
+  category,
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
+  supports,
+  attributes,
+  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  save: function () {
+    return null;
+  }
+};
+
+
+/***/ }),
+
+/***/ "./src/blocks/horizontal-line/block.json":
+/*!***********************************************!*\
+  !*** ./src/blocks/horizontal-line/block.json ***!
+  \***********************************************/
+/*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/horizontal-line\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"line\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null},\"barAxes\":{\"type\":\"string\",\"default\":\"y\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+
+/***/ }),
+
+/***/ "./src/blocks/horizontal-line/index.js":
+/*!*********************************************!*\
+  !*** ./src/blocks/horizontal-line/index.js ***!
+  \*********************************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/horizontal-line/block.json");
+var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/horizontal-line/block.json", 1);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const {
+  name,
+  category,
+  attributes,
+  supports,
+  textdomain
+} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const settings = {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line Graph', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Horizontal Line Graph.', `${textdomain}`),
+  icon: 'smiley',
+  category,
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line ', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
+  supports,
+  attributes,
+  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  save: function () {
+    return null;
+  }
+};
+
+
+/***/ }),
+
+/***/ "./src/blocks/line/block.json":
+/*!************************************!*\
+  !*** ./src/blocks/line/block.json ***!
+  \************************************/
+/*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/line\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"line\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+
+/***/ }),
+
+/***/ "./src/blocks/line/index.js":
+/*!**********************************!*\
+  !*** ./src/blocks/line/index.js ***!
+  \**********************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/line/block.json");
+var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/line/block.json", 1);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+// Leverating the same edit fucntion from pie
+
+
+
+
+const {
+  name,
+  category,
+  attributes,
+  supports,
+  textdomain
+} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const settings = {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line Chart', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Line Chart.', `${textdomain}`),
+  icon: 'smiley',
+  category,
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
+  supports,
+  attributes,
+  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
   }
@@ -1117,239 +1576,6 @@ module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie\",\"
 
 /***/ }),
 
-/***/ "./src/blocks/pie/edit.js":
-/*!********************************!*\
-  !*** ./src/blocks/pie/edit.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Edit; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
-
-
-
-
-
-
-function Edit({
-  attributes,
-  setAttributes,
-  className
-}) {
-  const mycanvas = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-  const {
-    labels,
-    title,
-    chartdata,
-    chartBgColor,
-    labelType,
-    chartID,
-    chartType
-  } = attributes;
-  const [chartObj, setChartObj] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(null); // local states for Custom Label Colors
-
-  const [labelOptions, setLabelOptions] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
-  const [selectedLabel, setSelectedLabel] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(labels[0]);
-  const [colorOptions, setColorOptions] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
-  const [selectedColor, setSelectedColor] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])(chartBgColor[0]);
-  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    // if chartID is null then create a unique id for the frontend Chart
-    if (!chartID) {
-      const uid = Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])();
-      setAttributes({
-        chartID: `chart-${uid}`
-      });
-    }
-
-    let chartInstance = new Chart(mycanvas.current, {
-      type: chartType,
-      data: {
-        labels,
-        datasets: [{
-          data: chartdata,
-          backgroundColor: chartBgColor,
-          hoverOffset: 2
-        }]
-      },
-      options: {
-        plugins: {
-          title: {
-            display: true,
-            text: title
-          }
-        }
-      }
-    });
-    setChartObj(chartInstance); // set the Labels in SelectControls in required format. Labels will Change when a new CSV is uploaded
-
-    processLabelsforOptions(); // set the Colors in Colorpallete n required format.
-
-    processColorOptions();
-  }, []);
-
-  const processLabelsforOptions = () => {
-    let alllabelForOptions = labels.map(label => {
-      return {
-        value: label,
-        label: label
-      };
-    });
-    setLabelOptions(alllabelForOptions);
-  };
-
-  const processColorOptions = () => {
-    let allColors = chartBgColor.map(color => {
-      return {
-        color: color
-      };
-    });
-    setColorOptions(allColors);
-  };
-
-  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (chartObj) {
-      // Update Chart settings and Re Render the canvas
-      updateChartSettings(); // Update the Labels in SelectControllers if new CSV is Uploadded
-
-      processLabelsforOptions();
-    }
-  }, [title, labels, chartdata, chartBgColor]);
-
-  const updateChartSettings = () => {
-    chartObj.options.plugins.title.text = title;
-    chartObj.data.datasets[0].data = chartdata;
-    chartObj.data.labels = labels;
-    chartObj.data.datasets[0].backgroundColor = chartBgColor;
-    chartObj.update();
-  }; // handle CSV Upload from FormFileUpload Component and pass on result to DataPareser
-
-
-  const handleCSVupload = e => {
-    const CSVreader = new FileReader();
-
-    CSVreader.onload = () => {
-      DataParser(CSVreader.result);
-    };
-
-    CSVreader.readAsText(e.target.files[0]);
-    setSelectedColor('#ff6385');
-  }; // Parse the Data in required Format and set new labels, chartdata and LabelType. (Label Type is what you see in Select Controller Select [LabelType] by default it is Language)
-
-
-  const DataParser = result => {
-    const table = result.split('\n').map(eachrow => eachrow.split(',')); // First Split the data in rows and then separate the column values
-
-    const columnnames = table[0]; // Get the column names which is the first item in rows array
-
-    const chartLabelType = columnnames[0];
-    table.shift(); // remove the first item which is column names to get the rows data
-
-    const rowsdata = table; //Get the labels which is the second item in rows array
-
-    const labels = rowsdata.map(row => row[0]); //Get the data which is the second item in rows array
-
-    const data = rowsdata.map(row => parseInt(row[1]));
-    setAttributes({
-      labels: labels,
-      chartdata: data,
-      labelType: chartLabelType
-    });
-  }; // set default selectedcolor of the current selectedlabel using it's index
-
-
-  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    const labelIndex = labels.indexOf(selectedLabel);
-    const color = chartBgColor[labelIndex];
-
-    if (chartObj) {
-      setSelectedColor(color);
-    }
-  }, [selectedLabel]); // if the current Label Color of selectedLabel is Changed, Update the Label Color
-
-  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (chartObj) {
-      updateLabelColor();
-    }
-  }, [selectedColor]);
-
-  const updateLabelColor = () => {
-    const labelIndex = labels.indexOf(selectedLabel);
-    let newLabelColors = [...chartBgColor];
-    newLabelColors[labelIndex] = selectedColor;
-    setAttributes({
-      chartBgColor: [...newLabelColors]
-    });
-  }; // set selected label color from colorPallete
-
-
-  const onLabelColorChange = newColor => {
-    setSelectedColor(newColor);
-  };
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
-    title: "Chart Settings",
-    initialOpen: true
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelRow"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["TextControl"], {
-    label: "Chart Tile",
-    value: title,
-    onChange: title => setAttributes({
-      title
-    })
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Upload CSV File"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["FormFileUpload"], {
-    accept: ".csv",
-    onChange: handleCSVupload,
-    render: ({
-      openFileDialog
-    }) => Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
-      style: {
-        marginBottom: '10px'
-      },
-      isSecondary: true,
-      onClick: openFileDialog
-    }, "Upload CSV File"))
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
-    title: "Chart Color Settings",
-    initialOpen: true
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])(`Select ${labelType}`),
-    value: selectedLabel,
-    onChange: label => setSelectedLabel(label),
-    options: [{
-      value: null,
-      label: `Select ${labelType}`,
-      disabled: !!attributes.user
-    }, ...labelOptions]
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Select Color"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ColorPalette"], {
-    value: selectedColor,
-    colors: colorOptions,
-    style: {
-      width: '200px'
-    },
-    onChange: onLabelColorChange
-  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("canvas", {
-    ref: mycanvas,
-    className: className,
-    style: {
-      margin: 40
-    },
-    width: "800",
-    height: "800"
-  }));
-}
-
-/***/ }),
-
 /***/ "./src/blocks/pie/index.js":
 /*!*********************************!*\
   !*** ./src/blocks/pie/index.js ***!
@@ -1361,7 +1587,7 @@ function Edit({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./src/blocks/pie/edit.js");
+/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/pie/block.json");
 var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/pie/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -1384,10 +1610,10 @@ const settings = {
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Doughnut Chart.', `${textdomain}`),
   icon: 'smiley',
   category,
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`)],
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
   attributes,
-  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
   }
@@ -1412,6 +1638,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_bar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blocks/bar */ "./src/blocks/bar/index.js");
 /* harmony import */ var _blocks_pie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/pie */ "./src/blocks/pie/index.js");
 /* harmony import */ var _blocks_doughnut__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./blocks/doughnut */ "./src/blocks/doughnut/index.js");
+/* harmony import */ var _blocks_line__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/line */ "./src/blocks/line/index.js");
+/* harmony import */ var _blocks_horizontal_bar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./blocks/horizontal-bar */ "./src/blocks/horizontal-bar/index.js");
+/* harmony import */ var _blocks_horizontal_line__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blocks/horizontal-line */ "./src/blocks/horizontal-line/index.js");
 /**
  * import Wordpress Dependencies
  */
@@ -1420,6 +1649,9 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * import Block Settings
  */
+
+
+
 
 
 
@@ -1434,7 +1666,7 @@ const regsiterBlock = block => {
 };
 
 const registerAllChartBlocks = () => {
-  const allBlocks = [_blocks_bar__WEBPACK_IMPORTED_MODULE_2__, _blocks_pie__WEBPACK_IMPORTED_MODULE_3__, _blocks_doughnut__WEBPACK_IMPORTED_MODULE_4__];
+  const allBlocks = [_blocks_bar__WEBPACK_IMPORTED_MODULE_2__, _blocks_pie__WEBPACK_IMPORTED_MODULE_3__, _blocks_doughnut__WEBPACK_IMPORTED_MODULE_4__, _blocks_line__WEBPACK_IMPORTED_MODULE_5__, _blocks_horizontal_bar__WEBPACK_IMPORTED_MODULE_6__, _blocks_horizontal_line__WEBPACK_IMPORTED_MODULE_7__];
   allBlocks.forEach(block => {
     regsiterBlock(block);
   });

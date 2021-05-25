@@ -8,13 +8,13 @@ import { createElement } from '@wordpress/element';
 const { name, category, attributes, supports, textdomain } = metadata;
 
 const settings = {
-	title: __('Doughnut Chart', `${textdomain}`),
-	description: __('Display your data in a Doughnut Chart.', `${textdomain}`),
+	title: __('Line Chart', `${textdomain}`),
+	description: __('Display your data in a Line Chart.', `${textdomain}`),
 	icon: 'smiley',
 	category,
 	keywords: [
-		__('Doughnut chart', `${textdomain}`),
-		__('Doughnut', `${textdomain}`),
+		__('Line chart', `${textdomain}`),
+		__('Line', `${textdomain}`),
 		__('charts', `${textdomain}`),
 		__('charts block', `${textdomain}`),
 		__('charts-blocks', `${textdomain}`),

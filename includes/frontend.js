@@ -11,9 +11,19 @@ function displayAllCharts() {
 			? chart.title
 			: 'Mostly spoken languages across the world';
 
+		let currentChartType = chart.chartType;
+		let indexAxis = null;
+
+		let chartTypeArray = chart.chartType.split('');
+		if (chartTypeArray.length > 9) {
+			let currentChartTypeArray = chartTypeArray.slice(11);
+			currentChartType = currentChartTypeArray.join('');
+			indexAxis = 'y';
+		}
+
 		if (chartctx) {
 			var myChart = new Chart(chartctx, {
-				type: chart.chartType,
+				type: currentChartType,
 				data: {
 					labels: labels,
 					datasets: [
@@ -25,6 +35,8 @@ function displayAllCharts() {
 					],
 				},
 				options: {
+					indexAxis: indexAxis,
+					responsive: true,
 					plugins: {
 						title: {
 							display: true,

@@ -42,7 +42,7 @@ function load_charts_block(){
     // variable to store all charts 
     wp_add_inline_script( "charts-blocks-frontendscript", 'let allchartsdata = []' , "before" );
 
-    $all_blocks = array("bar","pie","doughnut");
+    $all_blocks = array("bar","pie","doughnut", "line","horizontal-bar","horizontal-line");
 
     foreach($all_blocks as $block_name ){
         register_blocks($slug, $block_name);
@@ -54,14 +54,22 @@ function display_chart($attributes){
 
         $chartid = $attributes["chartID"] ? $attributes["chartID"] : "chart";
         wp_add_inline_script( "charts-blocks-frontendscript", 'allchartsdata.push( '. json_encode($attributes).')' , "before" );
-        //print_r($attributes);
+        
+       /*  echo "<pre>";
+            print_r($attributes);
+        echo "</pre>"; */
 
         /* HTML OUTPUT START */
-        echo '<canvas
-        id='.$chartid.'
-        aria-label="Hello ARIA World"
-        style = "margin: 40px"
-        role="img"></canvas>
+        echo '
+        <div className="chart-wrapper">
+            <canvas
+            id='.$chartid.'
+            aria-label="Hello ARIA World"
+            width="800"
+            height="800"
+            role="img">
+            </canvas>
+        </div>
         ';
         /* HTML OUTPUT END */
 
