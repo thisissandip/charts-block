@@ -925,10 +925,10 @@ function version(uuid) {
 
 /***/ }),
 
-/***/ "./src/blocks/bar/Inspector.js":
-/*!*************************************!*\
-  !*** ./src/blocks/bar/Inspector.js ***!
-  \*************************************/
+/***/ "./src/blocks/Inspector.js":
+/*!*********************************!*\
+  !*** ./src/blocks/Inspector.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1045,7 +1045,6 @@ function Inspector({
     let newBgColorsFull = [];
     labels.forEach(item => {
       if (newBgColorsFull.length <= labels.length) {
-        console.log('hi');
         newBgColorsFull.push(...defaultcolors);
       }
     });
@@ -1176,10 +1175,119 @@ module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/bar\",\"
 
 /***/ }),
 
-/***/ "./src/blocks/bar/edit.js":
-/*!********************************!*\
-  !*** ./src/blocks/bar/edit.js ***!
-  \********************************/
+/***/ "./src/blocks/bar/index.js":
+/*!*********************************!*\
+  !*** ./src/blocks/bar/index.js ***!
+  \*********************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../edit */ "./src/blocks/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/bar/block.json");
+var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/bar/block.json", 1);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const {
+  name,
+  category,
+  attributes,
+  supports,
+  textdomain
+} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('svg', {
+  width: 25,
+  height: 25
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('path', {
+  d: 'M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z'
+}));
+const settings = {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Graph', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Bar Graph.', `${textdomain}`),
+  icon: icon,
+  category,
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
+  supports,
+  attributes,
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  save: function () {
+    return null;
+  }
+};
+
+
+/***/ }),
+
+/***/ "./src/blocks/doughnut/block.json":
+/*!****************************************!*\
+  !*** ./src/blocks/doughnut/block.json ***!
+  \****************************************/
+/*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/doughnut\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"doughnut\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+
+/***/ }),
+
+/***/ "./src/blocks/doughnut/index.js":
+/*!**************************************!*\
+  !*** ./src/blocks/doughnut/index.js ***!
+  \**************************************/
+/*! exports provided: name, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../edit */ "./src/blocks/edit.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/doughnut/block.json");
+var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/doughnut/block.json", 1);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const {
+  name,
+  category,
+  attributes,
+  supports,
+  textdomain
+} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const settings = {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut Chart', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Doughnut Chart.', `${textdomain}`),
+  icon: 'smiley',
+  category,
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
+  supports,
+  attributes,
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  save: function () {
+    return null;
+  }
+};
+
+
+/***/ }),
+
+/***/ "./src/blocks/edit.js":
+/*!****************************!*\
+  !*** ./src/blocks/edit.js ***!
+  \****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1192,7 +1300,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Inspector */ "./src/blocks/bar/Inspector.js");
+/* harmony import */ var _Inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Inspector */ "./src/blocks/Inspector.js");
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
 
 
@@ -1326,116 +1434,6 @@ function Edit({
 
 /***/ }),
 
-/***/ "./src/blocks/bar/index.js":
-/*!*********************************!*\
-  !*** ./src/blocks/bar/index.js ***!
-  \*********************************/
-/*! exports provided: name, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit */ "./src/blocks/bar/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/bar/block.json");
-var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/bar/block.json", 1);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-const {
-  name,
-  category,
-  attributes,
-  supports,
-  textdomain
-} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
-const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('svg', {
-  width: 25,
-  height: 25
-}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('path', {
-  d: 'M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z'
-}));
-const settings = {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Graph', `${textdomain}`),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Bar Graph.', `${textdomain}`),
-  icon: icon,
-  category,
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
-  supports,
-  attributes,
-  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
-  save: function () {
-    return null;
-  }
-};
-
-
-/***/ }),
-
-/***/ "./src/blocks/doughnut/block.json":
-/*!****************************************!*\
-  !*** ./src/blocks/doughnut/block.json ***!
-  \****************************************/
-/*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/doughnut\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"doughnut\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
-
-/***/ }),
-
-/***/ "./src/blocks/doughnut/index.js":
-/*!**************************************!*\
-  !*** ./src/blocks/doughnut/index.js ***!
-  \**************************************/
-/*! exports provided: name, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/doughnut/block.json");
-var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/doughnut/block.json", 1);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-// Leverating the same edit fucntion from pie
-
-
-
-
-const {
-  name,
-  category,
-  attributes,
-  supports,
-  textdomain
-} = _block_json__WEBPACK_IMPORTED_MODULE_1__;
-const settings = {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut Chart', `${textdomain}`),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Doughnut Chart.', `${textdomain}`),
-  icon: 'smiley',
-  category,
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
-  supports,
-  attributes,
-  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
-  save: function () {
-    return null;
-  }
-};
-
-
-/***/ }),
-
 /***/ "./src/blocks/horizontal-bar/block.json":
 /*!**********************************************!*\
   !*** ./src/blocks/horizontal-bar/block.json ***!
@@ -1458,7 +1456,7 @@ module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/horizont
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../edit */ "./src/blocks/edit.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/horizontal-bar/block.json");
 var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/horizontal-bar/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -1490,7 +1488,7 @@ const settings = {
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
   attributes,
-  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
   }
@@ -1521,7 +1519,7 @@ module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/horizont
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../edit */ "./src/blocks/edit.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/horizontal-line/block.json");
 var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/horizontal-line/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -1547,7 +1545,7 @@ const settings = {
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line ', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
   attributes,
-  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
   }
@@ -1578,14 +1576,13 @@ module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/line\",\
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../edit */ "./src/blocks/edit.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/line/block.json");
 var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/line/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-// Leverating the same edit fucntion from pie
 
 
 
@@ -1605,7 +1602,7 @@ const settings = {
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
   attributes,
-  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
   }
@@ -1636,7 +1633,7 @@ module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/pie\",\"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _bar_edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bar/edit */ "./src/blocks/bar/edit.js");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../edit */ "./src/blocks/edit.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/pie/block.json");
 var _block_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./block.json */ "./src/blocks/pie/block.json", 1);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -1662,7 +1659,7 @@ const settings = {
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
   attributes,
-  edit: _bar_edit__WEBPACK_IMPORTED_MODULE_0__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
   }

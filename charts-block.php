@@ -29,25 +29,25 @@ function load_charts_block(){
     $assets = include(CHARTS_BLOCKS_PLUGIN_PATH . 'build/index.asset.php'); 
     
     // enqueue chartjs script for frontend
-    wp_enqueue_script("chartjs","https://cdn.jsdelivr.net/npm/chart.js", array(), "1.0", false);
+    wp_enqueue_script("chartjs",CHARTS_BLOCKS_PLUGIN_URL . "assets/chart.min.js", array(), "1.0", false);
    
     // enqueue block assets
     wp_register_script( $slug.'-script' , CHARTS_BLOCKS_PLUGIN_URL . 'build/index.js',
     $assets["dependencies"],  $assets["version"], false);
     wp_enqueue_script($slug.'-script');
-    wp_register_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."includes/frontend.js", array(),1.0 ,true);
-    wp_enqueue_style( $slug.'-editorStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/editorStyles.css', array("wp-edit-blocks"),  "1.0");
-    wp_enqueue_style( $slug.'-frontendStyles', CHARTS_BLOCKS_PLUGIN_URL . 'build/frontendStyles.css', array(), "1.0");
+    wp_register_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."src/blocks/frontend.js", array(),1.0 ,true);
 
     // variable to store all charts 
     wp_add_inline_script( "charts-blocks-frontendscript", 'let allchartsdata = []' , "before" );
 
     $all_blocks = array("bar","pie","doughnut", "line","horizontal-bar","horizontal-line");
-
+    // register all blocks in the array
     foreach($all_blocks as $block_name ){
         register_blocks($slug, $block_name);
     }  
 }
+
+// Front End HTML
 
 function display_chart($attributes){
         ob_start(); 
@@ -83,8 +83,6 @@ function display_chart($attributes){
 function register_blocks($slug, $block_name){
     register_block_type( $slug . '/' . $block_name, array(
         "editor_script" => $slug . '-script',
-        "editor-style"  => $slug . '-editorStyles',
-        "style"         => $slug . '-frontendStyles',
         "script"        => $slug . '-frontendscript',
         'attributes'      => array( 
             'chartType' => array(
@@ -97,6 +95,8 @@ function register_blocks($slug, $block_name){
 } 
 
 add_action("init", "load_charts_block");
+
+// Add new Block Categorie - charts_blocks
 
 function charts_blocks_categories($categories)
 {
