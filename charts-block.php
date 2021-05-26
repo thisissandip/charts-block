@@ -34,10 +34,15 @@ function load_charts_block(){
     // enqueue block assets
     wp_register_script( $slug.'-script' , CHARTS_BLOCKS_PLUGIN_URL . 'build/index.js',
     $assets["dependencies"],  $assets["version"], false);
+    // provide site url to editor script
     wp_enqueue_script($slug.'-script');
+    wp_add_inline_script( $slug.'-script', 'let siteurl = "'.CHARTS_BLOCKS_PLUGIN_URL.'"', "before" );
+
+  
+
     wp_register_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."src/blocks/frontend.js", array(),1.0 ,true);
 
-    // variable to store all charts 
+    // variable to store all charts attributes
     wp_add_inline_script( "charts-blocks-frontendscript", 'let allchartsdata = []' , "before" );
 
     $all_blocks = array("bar","pie","doughnut", "line","horizontal-bar","horizontal-line");

@@ -1007,8 +1007,8 @@ function Inspector({
     const table = result.split('\n').map(eachrow => eachrow.split(',')); // First Split the data in rows and then separate the column values
 
     const columnnames = table[0]; // Get the column names which is the first item in rows array
+    //const chartLabelType = columnnames[0];
 
-    const chartLabelType = columnnames[0];
     table.shift(); // remove the first item which is column names to get the rows data
 
     const rowsdata = table; //Get the labels which is the second item in rows array
@@ -1018,8 +1018,8 @@ function Inspector({
     const data = rowsdata.map(row => parseInt(row[1]));
     setAttributes({
       labels: labels,
-      chartdata: data,
-      labelType: chartLabelType
+      chartdata: data //	labelType: chartLabelType,
+
     });
   };
   /* File Upload End */
@@ -1107,7 +1107,7 @@ function Inspector({
     onChange: title => setAttributes({
       title
     })
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Upload CSV File"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["FormFileUpload"], {
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["FormFileUpload"], {
     accept: ".csv",
     onChange: handleCSVupload,
     render: ({
@@ -1119,7 +1119,10 @@ function Inspector({
       isSecondary: true,
       onClick: openFileDialog
     }, "Upload CSV File"))
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+    href: `${siteurl}/src/blocks/ChartBlock_Example_Data.csv`,
+    download: true
+  }, "Download Example CSV File")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
     title: "Chart Color Settings",
     initialOpen: true
   }, (chartType === 'bar' || chartType === 'line') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
@@ -1127,18 +1130,18 @@ function Inspector({
       margin: '25px 0 25px 0'
     }
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ToggleControl"], {
-    label: `Use same color for all ${labelType}s `,
+    label: `Use same color for all Labels `,
     checked: sameColor,
     onChange: e => setAttributes({
       sameColor: e
     })
   })), !sameColor && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])(`Select ${labelType}`),
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])(`Select Label`),
     value: selectedLabel,
     onChange: label => setSelectedLabel(label),
     options: [{
       value: null,
-      label: `Select ${labelType}`
+      label: `Select Label`
     }, ...labelOptions]
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Select Color"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ColorPalette"], {
     value: selectedColor,

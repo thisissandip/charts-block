@@ -60,7 +60,7 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 	const DataParser = (result) => {
 		const table = result.split('\n').map((eachrow) => eachrow.split(',')); // First Split the data in rows and then separate the column values
 		const columnnames = table[0]; // Get the column names which is the first item in rows array
-		const chartLabelType = columnnames[0];
+		//const chartLabelType = columnnames[0];
 		table.shift(); // remove the first item which is column names to get the rows data
 		const rowsdata = table;
 
@@ -72,7 +72,7 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 		setAttributes({
 			labels: labels,
 			chartdata: data,
-			labelType: chartLabelType,
+			//	labelType: chartLabelType,
 		});
 	};
 
@@ -158,7 +158,6 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 						/>
 					</PanelRow>
 
-					<p>Upload CSV File</p>
 					<FormFileUpload
 						accept='.csv'
 						onChange={handleCSVupload}
@@ -173,12 +172,18 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 							</div>
 						)}
 					/>
+
+					<a
+						href={`${siteurl}/src/blocks/ChartBlock_Example_Data.csv`}
+						download>
+						Download Example CSV File
+					</a>
 				</PanelBody>
 				<PanelBody title='Chart Color Settings' initialOpen={true}>
 					{(chartType === 'bar' || chartType === 'line') && (
 						<div style={{ margin: '25px 0 25px 0' }}>
 							<ToggleControl
-								label={`Use same color for all ${labelType}s `}
+								label={`Use same color for all Labels `}
 								checked={sameColor}
 								onChange={(e) => setAttributes({ sameColor: e })}
 							/>
@@ -187,13 +192,13 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 
 					{!sameColor && (
 						<SelectControl
-							label={__(`Select ${labelType}`)}
+							label={__(`Select Label`)}
 							value={selectedLabel}
 							onChange={(label) => setSelectedLabel(label)}
 							options={[
 								{
 									value: null,
-									label: `Select ${labelType}`,
+									label: `Select Label`,
 								},
 								...labelOptions,
 							]}
