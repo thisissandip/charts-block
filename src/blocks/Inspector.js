@@ -173,9 +173,7 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 						)}
 					/>
 
-					<a
-						href={`${siteurl}/src/blocks/ChartBlock_Example_Data.csv`}
-						download>
+					<a href={`${siteurl}/ChartBlock_Example_Data.csv`} download>
 						Download Example CSV File
 					</a>
 				</PanelBody>

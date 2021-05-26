@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
 	"name": "charts-blocks/horizontal-bar",
-	"category": "charts_blocks",
+	"category": "charts-blocks",
 	"textdomain": "charts-blocks",
 	"attributes": {
 		"title": {
@@ -40,5 +40,8 @@
 	"supports": {
 		"align": ["wide", "full"],
 		"html": false
-	}
+	},
+	"example": {},
+	"editorScript": "file:./build/index.js",
+	"script": "file:./build/frontendscript.js"
 }
