@@ -49,6 +49,9 @@ export default function Edit({ attributes, setAttributes, className }) {
 						display: true,
 						text: title,
 					},
+					legend: {
+						display: chartType === 'bar' || chartType === 'line' ? false : true,
+					},
 				},
 			},
 		});
@@ -100,12 +103,12 @@ export default function Edit({ attributes, setAttributes, className }) {
 
 	// If the Bg color of label or The title is Changed, Update the Chart
 	useEffect(() => {
+		console.log(chartBgColor);
 		if (chartObj) {
 			chartObj.options.plugins.title.text = title;
 			chartObj.data.datasets[0].backgroundColor = chartBgColor;
 			chartObj.update();
 		}
-		console.log(chartBgColor);
 	}, [chartBgColor, title]);
 
 	return (

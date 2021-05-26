@@ -35,6 +35,10 @@
 		"barAxes": {
 			"type": "string",
 			"default": "x"
+		},
+		"sameColor": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {

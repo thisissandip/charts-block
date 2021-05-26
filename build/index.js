@@ -959,7 +959,9 @@ function Inspector({
     title,
     labels,
     chartBgColor,
-    labelType
+    labelType,
+    chartType,
+    sameColor
   } = attributes; // local states for Custom Label Colors
 
   const [labelOptions, setLabelOptions] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
@@ -1023,15 +1025,47 @@ function Inspector({
   /* File Upload End */
 
   /* Label Bg Color Settings Start */
-  // if the current Label Color of selectedLabel is Changed, Update the Label Color
+  // If same color is selected, set the color to #812ffe and set set label to first label
+  // else switch back to default colors
 
 
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     if (chartObj) {
-      updateLabelColor();
+      if (sameColor) {
+        setSelectedColor('#812ffe');
+        setSelectedLabel(labels[0]);
+      } else {
+        switchtoDefaultColors();
+      }
     }
+  }, [sameColor]);
 
-    console.log(selectedColor);
+  const switchtoDefaultColors = () => {
+    let defaultcolors = ['#ff6385', '#36a3eb', '#ffcc56', '#812ffe', '#00e893'];
+    let newBgColorsFull = [];
+    labels.forEach(item => {
+      if (newBgColorsFull.length <= labels.length) {
+        console.log('hi');
+        newBgColorsFull.push(...defaultcolors);
+      }
+    });
+    let newBgColor = newBgColorsFull.slice(0, labels.length);
+    setAttributes({
+      chartBgColor: [...newBgColor]
+    });
+    setSelectedColor('#ff6385');
+  };
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (chartObj) {
+      if (sameColor) {
+        // When Same Color is Selected, Switch all bars to same color
+        updateAllLabelColors();
+      } else {
+        // if theLabel Color of  currently selectedLabel is Changed, Update the Label Color
+        updateLabelColor();
+      }
+    }
   }, [selectedColor]);
 
   const updateLabelColor = () => {
@@ -1041,6 +1075,12 @@ function Inspector({
     setAttributes({
       chartBgColor: [...newLabelColors]
     });
+  };
+
+  const updateAllLabelColors = () => {
+    setAttributes({
+      chartBgColor: [selectedColor]
+    });
   }; // set default selectedcolor of the current selectedlabel using it's index
 
 
@@ -1048,11 +1088,9 @@ function Inspector({
     const labelIndex = labels.indexOf(selectedLabel);
     const color = chartBgColor[labelIndex];
 
-    if (chartObj) {
+    if (chartObj && !sameColor) {
       setSelectedColor(color);
     }
-
-    console.log(labelIndex);
   }, [selectedLabel]);
   /* Label Bg Color Settings End */
   // ColorPallete Onchange Function
@@ -1085,7 +1123,17 @@ function Inspector({
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
     title: "Chart Color Settings",
     initialOpen: true
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], {
+  }, (chartType === 'bar' || chartType === 'line') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    style: {
+      margin: '25px 0 25px 0'
+    }
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ToggleControl"], {
+    label: `Use same color for all ${labelType}s `,
+    checked: sameColor,
+    onChange: e => setAttributes({
+      sameColor: e
+    })
+  })), !sameColor && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])(`Select ${labelType}`),
     value: selectedLabel,
     onChange: label => setSelectedLabel(label),
@@ -1124,7 +1172,7 @@ function Inspector({
 /*! exports provided: apiVersion, name, category, textdomain, attributes, supports, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/bar\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"bar\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null},\"barAxes\":{\"type\":\"string\",\"default\":\"x\"}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
+module.exports = JSON.parse("{\"apiVersion\":2,\"name\":\"charts-blocks/bar\",\"category\":\"charts_blocks\",\"textdomain\":\"charts-blocks\",\"attributes\":{\"title\":{\"type\":\"string\",\"default\":\"Mostly Spoken Languages across the World\"},\"labelType\":{\"type\":\"string\",\"default\":\"Language\"},\"labels\":{\"type\":\"array\",\"default\":[\"English\",\"Spanish\",\"French\"]},\"chartType\":{\"type\":\"string\",\"default\":\"bar\"},\"chartdata\":{\"type\":\"array\",\"default\":[300,50,100]},\"chartBgColor\":{\"type\":\"array\",\"default\":[\"#ff6385\",\"#36a3eb\",\"#ffcc56\",\"#812ffe\",\"#00e893\"]},\"chartID\":{\"type\":\"string\",\"default\":null},\"barAxes\":{\"type\":\"string\",\"default\":\"x\"},\"sameColor\":{\"type\":\"boolean\",\"default\":false}},\"supports\":{\"align\":[\"wide\",\"full\"],\"html\":false}}");
 
 /***/ }),
 
@@ -1198,6 +1246,9 @@ function Edit({
           title: {
             display: true,
             text: title
+          },
+          legend: {
+            display: chartType === 'bar' || chartType === 'line' ? false : true
           }
         }
       }
@@ -1250,13 +1301,13 @@ function Edit({
 
 
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(chartBgColor);
+
     if (chartObj) {
       chartObj.options.plugins.title.text = title;
       chartObj.data.datasets[0].backgroundColor = chartBgColor;
       chartObj.update();
     }
-
-    console.log(chartBgColor);
   }, [chartBgColor, title]);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "chart-wrapper"

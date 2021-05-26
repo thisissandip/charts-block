@@ -42,6 +42,12 @@ function displayAllCharts() {
 							display: true,
 							text: title,
 						},
+						legend: {
+							display:
+								currentChartType === 'bar' || currentChartType === 'line'
+									? false
+									: true,
+						},
 					},
 				},
 			});

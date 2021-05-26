@@ -14,8 +14,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 function Inspector({ attributes, setAttributes, chartObj }) {
-	const { title, labels, chartBgColor, labelType, chartType, sameColor } =
-		attributes;
+	const { title, labels, chartBgColor, labelType, chartType } = attributes;
 
 	// local states for Custom Label Colors
 	const [labelOptions, setLabelOptions] = useState([]);
@@ -80,44 +79,12 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 
 	/* Label Bg Color Settings Start */
 
-	// If same color is selected, set the color to #812ffe and set set label to first label
-	// else switch back to default colors
+	// if the current Label Color of selectedLabel is Changed, Update the Label Color
 	useEffect(() => {
 		if (chartObj) {
-			if (sameColor) {
-				setSelectedColor('#812ffe');
-				setSelectedLabel(labels[0]);
-			} else {
-				switchtoDefaultColors();
-			}
+			updateLabelColor();
 		}
-	}, [sameColor]);
-
-	const switchtoDefaultColors = () => {
-		let defaultcolors = ['#ff6385', '#36a3eb', '#ffcc56', '#812ffe', '#00e893'];
-		let newBgColorsFull = [];
-		labels.forEach((item) => {
-			if (newBgColorsFull.length <= labels.length) {
-				console.log('hi');
-				newBgColorsFull.push(...defaultcolors);
-			}
-		});
-
-		let newBgColor = newBgColorsFull.slice(0, labels.length);
-		setAttributes({ chartBgColor: [...newBgColor] });
-		setSelectedColor('#ff6385');
-	};
-
-	useEffect(() => {
-		if (chartObj) {
-			if (sameColor) {
-				// When Same Color is Selected, Switch all bars to same color
-				updateAllLabelColors();
-			} else {
-				// if theLabel Color of  currently selectedLabel is Changed, Update the Label Color
-				updateLabelColor();
-			}
-		}
+		console.log(selectedColor);
 	}, [selectedColor]);
 
 	const updateLabelColor = () => {
@@ -127,15 +94,11 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 		setAttributes({ chartBgColor: [...newLabelColors] });
 	};
 
-	const updateAllLabelColors = () => {
-		setAttributes({ chartBgColor: [selectedColor] });
-	};
-
 	// set default selectedcolor of the current selectedlabel using it's index
 	useEffect(() => {
 		const labelIndex = labels.indexOf(selectedLabel);
 		const color = chartBgColor[labelIndex];
-		if (chartObj && !sameColor) {
+		if (chartObj) {
 			setSelectedColor(color);
 		}
 	}, [selectedLabel]);
@@ -179,7 +142,7 @@ function Inspector({ attributes, setAttributes, chartObj }) {
 					{(chartType === 'bar' || chartType === 'line') && (
 						<div style={{ margin: '25px 0 25px 0' }}>
 							<ToggleControl
-								label={`Use same color for all ${labelType}s `}
+								label='Use Same Color For All Bars'
 								checked={sameColor}
 								onChange={(e) => setAttributes({ sameColor: e })}
 							/>
