@@ -2,11 +2,9 @@
 
 /**
  * Plugin Name: Charts Blocks
- * Plugin URI: Charts Blocks
- * Description: Display Beautiful Charts in your Website
+ * Description: Responsive, Interactive and Animated Charts in just two simple clicks. Select a Chart Block, Upload your CSV file and DONE. It's that easy!
  * Version: 1.0
  * Author: Sandip Mondal
- * Author URI: Sandip Mondal
  *
  * @category Gutenberg
  * @author Sandip Mondal
@@ -25,23 +23,19 @@ define('CHARTS_BLOCKS_BASE', plugin_basename( __FILE__ ) );
 function load_charts_block(){
 
     $slug = "charts-blocks";
-
     $assets = include(CHARTS_BLOCKS_PLUGIN_PATH . 'build/index.asset.php'); 
     
     // enqueue chartjs script for frontend
-    wp_enqueue_script("chartjs",CHARTS_BLOCKS_PLUGIN_URL . "assets/chart.min.js", array(), "1.0", false);
+    wp_enqueue_script("chartjs",CHARTS_BLOCKS_PLUGIN_URL . "chartjs/chart.min.js", array(), "1.0", false);
    
     // enqueue block assets
     wp_register_script( $slug.'-script' , CHARTS_BLOCKS_PLUGIN_URL . 'build/index.js',
     $assets["dependencies"],  $assets["version"], false);
-    // provide site url to editor script
     wp_enqueue_script($slug.'-script');
+     // provide site url to editor script
     wp_add_inline_script( $slug.'-script', 'let siteurl = "'.CHARTS_BLOCKS_PLUGIN_URL.'"', "before" );
 
-  
-
-    wp_register_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."src/blocks/frontend.js", array(),1.0 ,true);
-
+    wp_enqueue_script($slug.'-frontendscript',CHARTS_BLOCKS_PLUGIN_URL ."build/frontendscript.js", array(),1.0 ,true);
     // variable to store all charts attributes
     wp_add_inline_script( "charts-blocks-frontendscript", 'let allchartsdata = []' , "before" );
 
@@ -111,7 +105,7 @@ function charts_blocks_categories($categories)
     { 
         $new_block_categories = array_merge($categories, array(
             array(
-                "slug" => "charts_blocks",
+                "slug" => "charts-blocks",
                 "title" => "Charts",
                 "icons" => NULL
             )

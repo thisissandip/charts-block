@@ -1,9 +1,8 @@
 import edit from '../edit';
 import metadata from './block.json';
 import { __ } from '@wordpress/i18n';
-import { createElement } from '@wordpress/element';
 
-const { name, category, attributes, supports, textdomain } = metadata;
+const { name, category, attributes, supports, textdomain, example } = metadata;
 
 const icon = (
 	<svg
@@ -59,7 +58,7 @@ const settings = {
 	save: function () {
 		return null;
 	},
-	example: {},
+	example,
 };
 
 export { name, settings };
