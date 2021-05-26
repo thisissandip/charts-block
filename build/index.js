@@ -1301,8 +1301,6 @@ function Edit({
 
 
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(chartBgColor);
-
     if (chartObj) {
       chartObj.options.plugins.title.text = title;
       chartObj.data.datasets[0].backgroundColor = chartBgColor;

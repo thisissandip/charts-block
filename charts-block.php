@@ -54,19 +54,22 @@ function display_chart($attributes){
 
         $chartid = $attributes["chartID"] ? $attributes["chartID"] : "chart";
         wp_add_inline_script( "charts-blocks-frontendscript", 'allchartsdata.push( '. json_encode($attributes).')' , "before" );
+        $alignWidth = $attributes["align"] ? $attributes["align"] : null;
+
+        $alignClass = $attributes["align"] ? ' align'.$attributes["align"] : null;
+        $maxWidth  = $alignClass ? null : "style='max-width: 58rem'";
         
-       /*  echo "<pre>";
+/*         echo "<pre>";
             print_r($attributes);
-        echo "</pre>"; */
+        echo "</pre>"; */ 
 
         /* HTML OUTPUT START */
         echo '
-        <div className="chart-wrapper">
+        <div class="chart-wrapper'.$alignClass.'" '.$maxWidth.' >
             <canvas
             id='.$chartid.'
-            aria-label="Hello ARIA World"
-            width="800"
-            height="800"
+            width="900"
+            height="900"
             role="img">
             </canvas>
         </div>
