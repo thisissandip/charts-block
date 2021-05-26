@@ -56,7 +56,7 @@ function display_chart($attributes){
         $alignWidth = $attributes["align"] ? $attributes["align"] : null;
 
         $alignClass = $attributes["align"] ? ' align'.$attributes["align"] : null;
-        $maxWidth  = $alignClass ? null : "style='max-width: 58rem'";
+        $maxWidth  = $alignClass ? null : "style='max-width: 600px'";
         
 /*         echo "<pre>";
             print_r($attributes);
