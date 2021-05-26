@@ -1204,16 +1204,28 @@ const {
   supports,
   textdomain
 } = _block_json__WEBPACK_IMPORTED_MODULE_1__;
-const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('svg', {
-  width: 25,
-  height: 25
-}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('path', {
-  d: 'M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z'
-}));
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("svg", {
+  version: "1.0",
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "250.000000pt",
+  height: "250.000000pt",
+  viewBox: "0 0 250.000000 250.000000",
+  preserveAspectRatio: "xMidYMid meet"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("g", {
+  transform: "translate(0.000000,250.000000) scale(0.100000,-0.100000)",
+  fill: "#1E1E1E",
+  stroke: "none"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M250 1235 l0 -1115 255 0 255 0 0 1115 0 1115 -255 0 -255 0 0 -1115z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M1020 1050 l0 -940 255 0 255 0 0 940 0 940 -255 0 -255 0 0 -940z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M1760 800 l0 -680 255 0 255 0 0 680 0 680 -255 0 -255 0 0 -680z"
+})));
 const settings = {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Graph', `${textdomain}`),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Bar Graph.', `${textdomain}`),
-  icon: icon,
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Chart', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Bar Chart.', `${textdomain}`),
+  icon,
   category,
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Bar', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
@@ -1221,7 +1233,8 @@ const settings = {
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
-  }
+  },
+  example: {}
 };
 
 
@@ -1267,10 +1280,28 @@ const {
   supports,
   textdomain
 } = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("svg", {
+  version: "1.0",
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "980.000000pt",
+  height: "980.000000pt",
+  viewBox: "0 0 980.000000 980.000000",
+  preserveAspectRatio: "xMidYMid meet"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("g", {
+  transform: "translate(0.000000,980.000000) scale(0.100000,-0.100000)",
+  fill: "#1E1E1E",
+  stroke: "none"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M4900 8578 l0 -1225 121 -6 c1053 -57 1943 -765 2234 -1776 54 -190\n95 -453 95 -618 l0 -53 1225 0 1225 0 0 73 c0 40 -5 144 -10 232 -70 1094\n-491 2109 -1216 2935 -112 128 -386 398 -509 501 -848 714 -1878 1112 -2987\n1155 l-178 7 0 -1225z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M4200 9749 c-952 -143 -1794 -528 -2505 -1144 -147 -127 -423 -405\n-536 -540 -1099 -1306 -1443 -3063 -917 -4685 194 -597 500 -1146 922 -1650\n98 -117 370 -393 496 -504 1149 -1010 2674 -1424 4180 -1136 807 155 1604 539\n2235 1078 133 113 384 361 499 492 527 598 885 1282 1080 2057 46 183 99 479\n112 616 l7 77 -247 0 c-175 0 -246 -3 -246 -11 0 -25 -33 -232 -56 -354 -165\n-861 -621 -1699 -1261 -2316 -616 -593 -1371 -988 -2203 -1153 -1142 -227\n-2303 0 -3284 641 -477 312 -924 755 -1243 1233 -591 887 -839 1941 -707 3010\n96 782 425 1559 924 2184 706 885 1701 1454 2831 1620 59 9 112 16 118 16 8 0\n11 71 11 245 l0 245 -42 -1 c-24 0 -99 -9 -168 -20z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M4258 7764 c-1097 -245 -1957 -1094 -2218 -2189 -106 -444 -104 -928\n5 -1372 102 -416 295 -809 561 -1143 87 -109 344 -367 454 -454 332 -265 745\n-466 1160 -565 246 -59 387 -75 680 -75 223 0 288 4 410 22 533 82 983 275\n1410 606 129 100 360 329 463 458 298 374 494 789 592 1250 l23 108 -248 0\n-248 0 -22 -92 c-218 -891 -925 -1591 -1820 -1802 -200 -48 -319 -60 -560 -60\n-243 0 -359 12 -565 61 -527 124 -1005 427 -1347 853 -275 344 -445 736 -515\n1190 -24 159 -24 519 0 680 118 769 554 1409 1224 1794 171 98 427 199 622\n245 46 11 85 22 87 24 3 2 3 114 2 249 l-3 245 -147 -33z"
+})));
 const settings = {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut Chart', `${textdomain}`),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Doughnut Chart.', `${textdomain}`),
-  icon: 'smiley',
+  icon,
   category,
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Doughnut', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
@@ -1278,7 +1309,8 @@ const settings = {
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
-  }
+  },
+  example: {}
 };
 
 
@@ -1474,15 +1506,27 @@ const {
   supports,
   textdomain
 } = _block_json__WEBPACK_IMPORTED_MODULE_1__;
-const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('svg', {
-  width: 25,
-  height: 25
-}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])('path', {
-  d: 'M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z'
-}));
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("svg", {
+  version: "1.0",
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "250.000000pt",
+  height: "250.000000pt",
+  viewBox: "0 0 250.000000 250.000000",
+  preserveAspectRatio: "xMidYMid meet"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("g", {
+  transform: "translate(0.000000,250.000000) scale(0.100000,-0.100000)",
+  fill: "#1E1E1E",
+  stroke: "none"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M120 2090 l0 -250 1135 0 1135 0 0 250 0 250 -1135 0 -1135 0 0 -250z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M110 1280 l0 -310 755 0 755 0 0 310 0 310 -755 0 -755 0 0 -310z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M120 460 l0 -290 1035 0 1035 0 0 290 0 290 -1035 0 -1035 0 0 -290z"
+})));
 const settings = {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar Graph', `${textdomain}`),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Horizontal Bar Graph.', `${textdomain}`),
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar Chart', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Horizontal Bar Chart.', `${textdomain}`),
   icon: icon,
   category,
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Bar', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
@@ -1491,7 +1535,8 @@ const settings = {
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
-  }
+  },
+  example: {}
 };
 
 
@@ -1537,10 +1582,26 @@ const {
   supports,
   textdomain
 } = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("svg", {
+  version: "1.0",
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "250.000000pt",
+  height: "250.000000pt",
+  viewBox: "0 0 250.000000 250.000000",
+  preserveAspectRatio: "xMidYMid meet"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("g", {
+  transform: "translate(0.000000,250.000000) scale(0.100000,-0.100000)",
+  fill: "#1E1E1E",
+  stroke: "none"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M190 1250 l0 -1070 1065 0 1065 0 0 100 0 100 -985 0 -985 0 0 970 0\n970 -80 0 -80 0 0 -1070z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M566 2251 c-16 -11 -35 -30 -42 -43 -18 -31 -17 -93 0 -126 28 -53\n121 -86 181 -63 15 6 73 -40 315 -252 l295 -259 1 -56 c0 -32 4 -66 8 -77 5\n-16 -5 -32 -48 -74 l-55 -55 -86 0 -87 -1 -34 -37 c-28 -31 -34 -45 -34 -83 0\n-38 6 -52 34 -83 l35 -37 90 0 90 0 154 -134 154 -134 -4 -61 c-4 -53 -2 -65\n18 -90 26 -34 92 -66 134 -66 42 0 107 32 133 65 46 59 22 154 -48 190 -33 17\n-132 20 -159 5 -16 -8 -46 14 -179 131 l-160 140 5 53 c3 30 1 61 -5 73 -9 17\n-3 28 49 79 l60 59 60 -3 c58 -4 61 -3 99 36 37 37 40 44 40 94 0 63 -20 97\n-69 118 -30 12 -101 10 -132 -4 -24 -10 -603 499 -593 522 14 32 16 93 4 122\n-7 17 -27 39 -45 50 -44 27 -138 28 -179 1z"
+})));
 const settings = {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line Graph', `${textdomain}`),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Horizontal Line Graph.', `${textdomain}`),
-  icon: 'smiley',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line Chart', `${textdomain}`),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Horizontal Line Chart.', `${textdomain}`),
+  icon,
   category,
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line Chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Horizontal Line ', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
@@ -1548,7 +1609,8 @@ const settings = {
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
-  }
+  },
+  example: {}
 };
 
 
@@ -1594,10 +1656,26 @@ const {
   supports,
   textdomain
 } = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("svg", {
+  version: "1.0",
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "250.000000pt",
+  height: "250.000000pt",
+  viewBox: "0 0 250.000000 250.000000",
+  preserveAspectRatio: "xMidYMid meet"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("g", {
+  transform: "translate(0.000000,250.000000) scale(0.100000,-0.100000)",
+  fill: "#1E1E1E",
+  stroke: "none"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M140 1210 l0 -1070 1065 0 1065 0 0 100 0 100 -985 0 -985 0 0 970 0\n970 -80 0 -80 0 0 -1070z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M2081 1866 c-53 -29 -85 -122 -62 -181 6 -15 -40 -73 -252 -315\nl-259 -295 -56 -1 c-32 0 -66 -4 -77 -8 -16 -5 -32 5 -74 48 l-55 55 0 86 -1\n87 -37 34 c-31 28 -45 34 -83 34 -38 0 -52 -6 -83 -34 l-37 -35 0 -90 0 -90\n-134 -154 -134 -154 -61 4 c-53 4 -65 2 -90 -18 -34 -26 -66 -92 -66 -134 0\n-42 32 -107 65 -133 59 -46 154 -22 190 48 17 33 20 132 5 159 -8 16 14 46\n131 179 l140 160 53 -5 c30 -3 61 -1 73 5 17 9 28 3 79 -49 l59 -60 -3 -60\nc-4 -58 -3 -61 36 -99 37 -37 44 -40 94 -40 63 0 97 20 118 69 12 30 10 101\n-4 132 -10 24 499 603 522 593 32 -14 93 -16 122 -4 91 38 96 218 8 266 -30\n17 -97 17 -127 0z"
+})));
 const settings = {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line Chart', `${textdomain}`),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Line Chart.', `${textdomain}`),
-  icon: 'smiley',
+  icon,
   category,
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Line', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
@@ -1605,7 +1683,8 @@ const settings = {
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
-  }
+  },
+  example: {}
 };
 
 
@@ -1651,10 +1730,26 @@ const {
   supports,
   textdomain
 } = _block_json__WEBPACK_IMPORTED_MODULE_1__;
+const icon = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("svg", {
+  version: "1.0",
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "980.000000pt",
+  height: "996.000000pt",
+  viewBox: "0 0 980.000000 996.000000",
+  preserveAspectRatio: "xMidYMid meet"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("g", {
+  transform: "translate(0.000000,996.000000) scale(0.100000,-0.100000)",
+  fill: "#1E1E1E",
+  stroke: "none"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M4651 9949 c-919 -53 -1828 -376 -2588 -921 -392 -281 -795 -679\n-1089 -1073 -453 -609 -756 -1309 -895 -2064 -42 -229 -79 -608 -79 -808 l0\n-73 2475 0 2475 0 0 2475 0 2475 -77 -1 c-43 -1 -143 -6 -222 -10z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["createElement"])("path", {
+  d: "M5468 6803 l-3 -2468 -2467 -3 -2468 -2 0 -33 c0 -57 30 -298 56\n-452 213 -1247 953 -2374 2021 -3078 1226 -808 2759 -986 4147 -482 465 169\n905 418 1313 743 184 147 511 467 659 647 572 692 926 1508 1038 2395 53 415\n44 898 -24 1318 -303 1863 -1704 3357 -3546 3781 -213 49 -565 101 -681 101\nl-43 0 -2 -2467z m722 1886 c724 -184 1381 -559 1915 -1094 681 -681 1093\n-1541 1207 -2520 17 -149 17 -702 0 -860 -98 -881 -449 -1677 -1032 -2338\n-684 -774 -1619 -1259 -2665 -1384 -211 -25 -710 -25 -915 0 -770 95 -1460\n372 -2060 826 -229 174 -491 422 -671 636 -420 499 -714 1077 -868 1705 -16\n69 -33 144 -37 168 l-7 42 2439 0 2439 0 -3 2436 -4 2437 53 -7 c30 -4 123\n-25 209 -47z"
+})));
 const settings = {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie Chart', `${textdomain}`),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Doughnut Chart.', `${textdomain}`),
-  icon: 'smiley',
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display your data in a Pie Chart.', `${textdomain}`),
+  icon,
   category,
   keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie chart', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Pie', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts block', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('charts-blocks', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graph', `${textdomain}`), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('graphs', `${textdomain}`)],
   supports,
@@ -1662,7 +1757,8 @@ const settings = {
   edit: _edit__WEBPACK_IMPORTED_MODULE_0__["default"],
   save: function () {
     return null;
-  }
+  },
+  example: {}
 };
 
 
