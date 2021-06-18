@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Charts Blocks
+ * Plugin Name: Charts Blocks for Gutenberg
  * Description: Responsive, Interactive and Animated Charts in just two simple clicks. Select a Chart Block, Upload your CSV file and DONE. It's that easy!
  * Version: 1.0.0
  * Author: Sandip Mondal

@@ -53,3 +53,11 @@ Download the example CSV file provided below the Upload CSV button. Make sure yo
 
 Grouped Bar Charts, Multiline Charts and many more Chart Types will be added in the upcoming versions.
 
+== Screenshots ==
+
+1. Make Beautiful, Interactive and Animated Charts in just 2 steps! (Pie Chart Example)
+2. Making Charts on Wordpress have never been this easy! (Bar Chart Example)
+3. 6 different Chart Blocks. Explore them all!
+4. Doughnut Chart Example
+
+
