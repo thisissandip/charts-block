@@ -5,10 +5,12 @@ Select a Chart Block, Upload your CSV file and DONE. It's that easy!
 
 ### [Download Plugin](https://wordpress.org/plugins/charts-blocks/)
 
-Bar Chart Example:
+Bar Chart Example:\
+\
 ![Bar Chart Block](screenshot-2.gif)
 
-Pie Chart Example:
+Pie Chart Example:\
+\
 ![Pie Chart Block](screenshot-1.gif)
 
 ### 🧰 &nbsp;Built with
